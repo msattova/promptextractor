@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="styles.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tauri App</title>
+    <script type="module" src="/main.js" defer></script>
+  </head>
+
+  <body>
+    <div id="toast">
+      <p></p>
+    </div>
+    <div id="container">
+      <div class="row">
+        <div class="column left">
+          <div id="data-view">
+            <p id="path"></p>
+            <div id="data"></div>
+          </div>
+        </div>
+        <div class="column right">
+          <div id="image-view">
+            <p id="drop-here">ここに画像をドラッグアンドドロップ</p>
+            <img id="input-picture">
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      const copyText = (id) => {
+          const toast = document.querySelector("#toast");
+          const toast_message = document.querySelector("#toast > p");
+          navigator.clipboard
+                   .writeText(document.querySelector(id).textContent)
+                   .then(
+                      (success) => toast_message.textContent = "コピー成功！",
+                      (error) => toast_message.textContent = "エラー発生！"
+                   );
+          toast.style.visibility = "visible";
+          setTimeout(() => {
+            toast.style.visibility = "hidden";
+          }, 3000);
+        };
+    </script>
+  </body>
+</html>
